@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Web Tech Course Work</title>
+        <link rel="stylesheet" media="all" href="/public/css/main.css" />
+    </head>
+    <body>
+        <div class="header">
+            <table width="100%">
+                <tr>
+                    <td>
+                        [% navigator %]
+                    </td>
+                    <td align="right">
+                        [% IF username %]
+                            Hello, [% username %]
+                        [% ELSE %]
+                            --
+                        [% END %]
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="main_part">
+            [% content %]
+        </div>
+        <div class="footer">
+            KTKT Web Tech Course Work by Denys Bushtruk
+        </div>
+    </body>
+</html>

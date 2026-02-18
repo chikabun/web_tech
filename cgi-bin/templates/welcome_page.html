@@ -1,9 +1,66 @@
-<div>
-    <h1> WEB TECH COURSE WORK </h1>
-</div>
-<div>
-    <a href="/cgi-bin/login.pl">LOGIN</a>
-</div>
-<div>
-    <a href="/cgi-bin/registration.pl">SIGN UP</a>
-</div>
+[% WRAPPER wrapper.html %]
+
+    <div class="welcome_content">
+        <div>
+            <h1> WEB TECH COURSE WORK </h1>
+        </div>
+
+        <div>
+            <h2> Features: </h2>
+        </div>
+
+        <div>
+            <table border="1" class="welcome_content_table">
+                <tr>
+                    <td>
+                        General architecture
+                    </td>
+                    <td>
+                        CGI scipts + Apache2
+                    </td>
+                    <td>
+                        https://httpd.apache.org/docs/trunk/howto/cgi.html
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Server side programming
+                    </td>
+                    <td>
+                        Perl v5.30
+                    </td>
+                    <td>
+                        https://www.perl.org/
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Templates
+                    </td>
+                    <td>
+                        Perl Template Toolkit
+                    </td>
+                    <td>
+                        https://metacpan.org/pod/Template
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Database
+                    </td>
+                    <td>
+                        MySQL
+                    </td>
+                    <td>
+                        https://www.mysql.com/
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            &nbsp;
+        </div>
+    </div>
+
+[% END %]

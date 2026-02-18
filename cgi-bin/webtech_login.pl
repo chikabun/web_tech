@@ -1,38 +1,46 @@
 #!/usr/bin/perl
 
 use v5.30;
+use lib '.';
+
 use CGI;
 use Template;
-use DBI;
+
+use db;
+use markup;
 
 my $q = CGI->new;
 my $login = $q->param('login');
 my $password = $q->param('password');
-
-my $dbh = DBI->connect("DBI:mysql:database=webtech;host=localhost", "root", "root");
+my $uid = $q->param('uid');
 
 my $template = Template->new({ INCLUDE_PATH => 'templates' });
-my $vars = {};
+
+my $vars = {
+    uid => $uid,
+    navigator => markup::getNavigator($uid),
+};
+
+if ($uid) {
+    my $isSessionOK = db::isSessionOK($uid);
+    if ($isSessionOK) {
+        my $user = db::getUser($uid);
+        $vars->{username} = $user->{firstname} . ' ' . $user->{lastname};
+    }
+}
 
 if (!$login && !$password) {  
     $vars->{login_message} = 'Enter login and password please';
 }
 else {
-    my $sql = "SELECT * FROM users WHERE login=? AND password=?";
-    my $sth = $dbh->prepare($sql);
-    $sth->execute($login, $password);
-    my $row = $sth->fetchrow_hashref();
+    my $row = db::getUserByLoginAndPassword($login, $password);
 
     if ($row) {
         $vars->{login_message} = 'Hello, ' . $row->{firstname} . ' ' . $row->{lastname};
 
         # create session
-        $dbh->do(
-            sprintf "INSERT INTO sessions (created, user) VALUES (%s, %s)", time(), $row->{uid}
-        ) or die $dbh->errstr;
-
-        print $q->redirect("/cgi-bin/main.pl?userid=" . $row->{uid});
-
+        db::createSession($row->{uid});
+        print $q->redirect("/cgi-bin/webtech_main.pl?uid=" . $row->{uid});
         exit;
     }
     else {

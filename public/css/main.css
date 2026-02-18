@@ -1,0 +1,22 @@
+.header {
+    background-color: gray;
+}
+.main_part {
+    background-color: white;
+}
+.footer {
+    background-color: gray;
+    text-align: center;
+}
+.login_table {
+    width: 300px;
+    margin: auto;
+}
+.welcome_content {
+    text-align: center;
+}
+.welcome_content_table {
+    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+}

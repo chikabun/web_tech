@@ -1,4 +1,3 @@
-/*
 CREATE TABLE users (
     uid int NOT NULL AUTO_INCREMENT,
     login varchar(100) NOT NULL,
@@ -10,7 +9,6 @@ CREATE TABLE users (
 
     PRIMARY KEY (uid)
 );
-*/
 
 CREATE TABLE sessions (
     sid int NOT NULL AUTO_INCREMENT,
