@@ -1,0 +1,77 @@
+<form method='POST'>
+    <table class="registration_table">
+        <tr>
+            <td>
+                Login
+            </td>
+            <td>
+                [% IF login %]
+                    [% login %]
+                    <input type='hidden' name='uid' value='[% uid %]'>
+                [% ELSE %]
+                    <input type='text' name='login' value=''>
+                [% END %]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Password
+            </td>
+            <td>
+                <input type='text' name='password' value=''>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email
+            </td>
+            <td>
+                <input type='text' name='email' value='[% email %]'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Firstname
+            </td>
+            <td>
+                <input type='text' name='firstname' value='[% firstname %]'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lastname
+            </td>
+            <td>
+                <input type='text' name='lastname' value='[% lastname %]'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Position
+            </td>
+            <td>
+                <input type='text' name='position' value='[% position %]'>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type='submit' name='submit_button' value='[% submit_button_title %]'>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                [% registration_message %]
+            </td>
+        </tr>
+    </table>
+</form>

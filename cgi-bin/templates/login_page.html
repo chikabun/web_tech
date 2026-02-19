@@ -1,39 +1,49 @@
 [% WRAPPER wrapper.html %]
 
-    <form method='POST'>
-        <table class="login_table">
-            <tr>
-                <td>
-                    Login
-                </td>
-                <td>
-                    <input type='text' name='login' value=''>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Password
-                </td>
-                <td>
-                    <input type='text' name='password' value=''>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type='submit' name='submit_button' value='Login'>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    &nbsp;
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    [% login_message %]
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div class="login_content">
+        
+        <h2> Sign in </h2>
+
+        <form method='POST'>
+            <table class="login_table">
+                <tr>
+                    <td>
+                        Login
+                    </td>
+                    <td>
+                        <input type='text' name='login' value=''>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password
+                    </td>
+                    <td>
+                        <input type='text' name='password' value=''>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type='submit' name='submit_button' value='Login'>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        [% login_message %]
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 [% END %]

@@ -8,11 +8,11 @@
     background-color: gray;
     text-align: center;
 }
-.login_table {
-    width: 300px;
+.login_table , .registration_table {
+    width: 400px;
     margin: auto;
 }
-.welcome_content {
+.welcome_content , .registration_content , .login_content , .main_content {
     text-align: center;
 }
 .welcome_content_table {

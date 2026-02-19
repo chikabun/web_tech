@@ -66,4 +66,52 @@ sub dropSession {
     $sth->execute($user) or die $dbh->errstr;
 }
 
+sub createUser {
+    my $data = shift;
+
+    $dbh->do(
+        "
+            INSERT INTO users 
+            (login, password, email, firstname, lastname, position)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ",
+        undef,
+        $data->{login},
+        $data->{password},
+        $data->{email},
+        $data->{firstname},
+        $data->{lastname},
+        $data->{position},
+    ) or return 0;
+
+    return 1;
+}
+
+sub updateUser {
+    my $data = shift;
+
+    $dbh->do(
+        "
+            UPDATE users 
+            SET email=?, firstname=?, lastname=?, position=?
+            WHERE uid=?
+        ",
+        undef,
+        $data->{email},
+        $data->{firstname},
+        $data->{lastname},
+        $data->{position},
+        $data->{uid},
+    );
+
+    if ($data->{password}) {
+        $dbh->do(
+            "UPDATE users SET password=? WHERE uid=?",
+            undef,
+            $data->{password},
+            $data->{uid},
+        );
+    }
+}
+
 1;
