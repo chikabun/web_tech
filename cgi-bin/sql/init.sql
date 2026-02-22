@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `sessions`;
+
 CREATE TABLE users (
     `uid` int NOT NULL AUTO_INCREMENT,
     `login` varchar(100) NOT NULL,
@@ -27,6 +30,7 @@ CREATE TABLE sessions (
     `sid` int NOT NULL AUTO_INCREMENT,
     `created` int NOT NULL,
     `user` int NOT NULL,
+    `session_id` varchar(32) NOT NULL,
 
     PRIMARY KEY (sid)
 );

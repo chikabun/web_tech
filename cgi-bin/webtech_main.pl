@@ -4,36 +4,39 @@ use v5.30;
 use lib '.';
 
 use CGI;
-use Template;
 
 use db;
 use markup;
+use pdf;
 
 my $q = CGI->new;
-my $uid = $q->param('uid');
+my $sid = $q->param('session_id');
+my $isCreatePDF = $q->param('create_pdf');
+my $t = $q->param('txt');
 
-my $template = Template->new({ INCLUDE_PATH => 'templates' });
 my $vars = {
-    uid => $uid,
-    navigator => markup::getNavigator($uid),
+    sid => $sid,
+    navigator => markup::getNavigator($sid),
 };
 
-if ($uid) {
-    my $isSessionOK = db::isSessionOK($uid);
+if ($sid) {
+    my $isSessionOK = db::isSessionOK($sid);
 
     if ($isSessionOK) {
 
-        my $user = db::getUser($uid);
+        # main work
+        if ($isCreatePDF) {
+            pdf::createPDF($t);
+        }
+
+        my $user = db::getUserBySessionId($sid);
 
         $vars->{username} = $user->{firstname} . ' ' . $user->{lastname};
 
-        print "Content-Type: text/html\n\n";
-        $template->process('main_page.html', $vars) || die $template->error();
+        markup::createPage('main_page.html', $vars);
 
         exit;
     }
 }
 
-print "Content-Type: text/html\n\n";
-$template->process('empty_page.html', $vars) || die $template->error();    
-
+markup::createPage('empty_page.html', $vars);

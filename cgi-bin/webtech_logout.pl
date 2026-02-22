@@ -8,10 +8,10 @@ use CGI;
 use db;
 
 my $q = CGI->new;
-my $uid = $q->param('uid');
+my $sid = $q->param('session_id');
 
-if ($uid) {
-    db::dropSession($uid);
+if ($sid) {
+    db::dropSession($sid);
 }
 
-print $q->redirect("/cgi-bin/webtech_welcome.pl");
+print $q->redirect("/cgi-bin/webtech_login.pl");

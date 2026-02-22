@@ -4,13 +4,12 @@ use v5.30;
 use lib '.';
 
 use CGI;
-use Template;
 
 use db;
 use markup;
 
 my $q = CGI->new;
-my $uid = $q->param('uid');
+my $sid = $q->param('session_id');
 my $login = $q->param('login');
 my $password = $q->param('password');
 my $email = $q->param('email');
@@ -19,16 +18,15 @@ my $lastname = $q->param('lastname');
 my $position = $q->param('position');
 my $isSubmit = $q->param('submit_button');
 
-my $template = Template->new({ INCLUDE_PATH => 'templates' });
 my $vars = {
-    uid => $uid,
-    navigator => markup::getNavigator($uid),
+    sid => $sid,
+    navigator => markup::getNavigator($sid),
 };
 
-if ($uid) {
-    my $isSessionOK = db::isSessionOK($uid);
+if ($sid) {
+    my $isSessionOK = db::isSessionOK($sid);
     if ($isSessionOK) {
-        my $user = db::getUser($uid);
+        my $user = db::getUserBySessionId($sid);
         $vars->{username} = $user->{firstname} . ' ' . $user->{lastname};
     }
 }
@@ -48,8 +46,8 @@ if ($isSubmit) {
         if ($isOK) {
             my $row = db::getUserByLoginAndPassword($login, $password);
             if ($row) {
-                db::createSession($row->{uid});
-                print $q->redirect("/cgi-bin/webtech_main.pl?uid=" . $row->{uid});
+                my $sessionId = db::createSession($row->{uid});
+                print $q->redirect("/cgi-bin/webtech_main.pl?session_id=" . $sessionId);
                 exit;
             }
         }
@@ -64,5 +62,4 @@ else {
     $vars->{registration_message} = 'Define all values please';
 }
 
-print "Content-Type: text/html\n\n";
-$template->process('registration_page.html', $vars) || die $template->error();
+markup::createPage('registration_page.html', $vars);

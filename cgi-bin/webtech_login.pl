@@ -4,7 +4,6 @@ use v5.30;
 use lib '.';
 
 use CGI;
-use Template;
 
 use db;
 use markup;
@@ -12,19 +11,17 @@ use markup;
 my $q = CGI->new;
 my $login = $q->param('login');
 my $password = $q->param('password');
-my $uid = $q->param('uid');
-
-my $template = Template->new({ INCLUDE_PATH => 'templates' });
+my $sid = $q->param('session_id');
 
 my $vars = {
-    uid => $uid,
-    navigator => markup::getNavigator($uid),
+    sid => $sid,
+    navigator => markup::getNavigator($sid),
 };
 
-if ($uid) {
-    my $isSessionOK = db::isSessionOK($uid);
+if ($sid) {
+    my $isSessionOK = db::isSessionOK($sid);
     if ($isSessionOK) {
-        my $user = db::getUser($uid);
+        my $user = db::getUserBySessionId($sid);
         $vars->{username} = $user->{firstname} . ' ' . $user->{lastname};
     }
 }
@@ -39,8 +36,8 @@ else {
         $vars->{login_message} = 'Hello, ' . $row->{firstname} . ' ' . $row->{lastname};
 
         # create session
-        db::createSession($row->{uid});
-        print $q->redirect("/cgi-bin/webtech_main.pl?uid=" . $row->{uid});
+        my $sessionId = db::createSession($row->{uid});
+        print $q->redirect("/cgi-bin/webtech_main.pl?session_id=" . $sessionId);
         exit;
     }
     else {
@@ -48,5 +45,4 @@ else {
     }
 }
 
-print "Content-Type: text/html\n\n";
-$template->process('login_page.html', $vars) || die $template->error();
+markup::createPage('login_page.html', $vars);

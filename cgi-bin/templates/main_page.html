@@ -2,6 +2,16 @@
 
     <div class="main_content">
         <h1> This is secured page </h1>
+
+        <form method="POST">
+            <input type='hidden' name='session_id' value='[% sid %]'>
+            <div>
+                <input type="text" name="txt" value="">
+            </div>
+            <div>
+                <input type="submit" name="create_pdf" value="Create PDF">
+            </div>
+        </form>
     </div>
 
 [% END %]

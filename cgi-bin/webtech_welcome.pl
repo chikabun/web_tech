@@ -4,27 +4,24 @@ use v5.30;
 use lib '.';
 
 use CGI;
-use Template;
 
 use db;
 use markup;
 
 my $q = CGI->new;
-my $uid = $q->param('uid');
+my $sid = $q->param('session_id');
 
-my $template = Template->new({ INCLUDE_PATH => 'templates' });
 my $vars = {
-    uid => $uid,
-    navigator => markup::getNavigator($uid),
+    sid => $sid,
+    navigator => markup::getNavigator($sid),
 };
 
-if ($uid) {
-    my $isSessionOK = db::isSessionOK($uid);
+if ($sid) {
+    my $isSessionOK = db::isSessionOK($sid);
     if ($isSessionOK) {
-        my $user = db::getUser($uid);
+        my $user = db::getUserBySessionId($sid);
         $vars->{username} = $user->{firstname} . ' ' . $user->{lastname};
     }
 }
 
-print "Content-Type: text/html\n\n";
-$template->process('welcome_page.html', $vars) || die $template->error();
+markup::createPage('welcome_page.html', $vars);
