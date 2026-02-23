@@ -4,6 +4,7 @@ use v5.30;
 use lib '.';
 
 use CGI;
+use Data::Dumper;
 
 use db;
 use markup;
@@ -24,15 +25,26 @@ if ($sid) {
 
     if ($isSessionOK) {
 
-        # main work
-        if ($isCreatePDF) {
-            pdf::createPDF($t);
-        }
-
         my $user = db::getUserBySessionId($sid);
 
+        # do main work, if a PDF creation required
+        if ($isCreatePDF) {
+            pdf::createPDF($t, $user->{uid});
+            db::createTask($user->{uid}, $t);
+        }
+
+        # display main page
+        my $user = db::getUserBySessionId($sid);
         $vars->{username} = $user->{firstname} . ' ' . $user->{lastname};
 
+        my $tasks = db::getAllTasksForUser($user->{uid});
+        my $ctr = 1;
+        for my $task (@{$tasks}) {
+            $task->{position} = $ctr;
+            $task->{created} = localtime($task->{created});
+            $ctr++;
+        }
+        $vars->{tasks} = $tasks;
         markup::createPage('main_page.html', $vars);
 
         exit;

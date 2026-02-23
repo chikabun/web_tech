@@ -1,11 +1,13 @@
 package pdf;
 
-use PDF::API2;
+use PDF::Builder;
+use File::Path qw(make_path);
 
 sub createPDF {
     my $t = shift;
+    my $uid = shift;
 
-    my $pdf = PDF::API2->new() or die $!;
+    my $pdf = PDF::Builder->new() or die $!;
 
     # Add a blank page
     my $page = $pdf->page();
@@ -24,7 +26,8 @@ sub createPDF {
     # my $image = $pdf->image('ex2.png');
     # $page->object($image, 100, 100);
 
-    $pdf->save('new.pdf');
+    make_path('pdfs/' . $uid . '/');
+    $pdf->save('pdfs/' . $uid . '/' . time() . '.pdf');
 }
 
 1;

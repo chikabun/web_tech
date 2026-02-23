@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `sessions`;
+DROP TABLE IF EXISTS `tasks`;
 
 CREATE TABLE users (
     `uid` int NOT NULL AUTO_INCREMENT,
@@ -33,4 +34,13 @@ CREATE TABLE sessions (
     `session_id` varchar(32) NOT NULL,
 
     PRIMARY KEY (sid)
+);
+
+CREATE TABLE tasks (
+    `tid` int NOT NULL AUTO_INCREMENT,
+    `created` int NOT NULL,
+    `user` int NOT NULL,
+    `data` text NOT NULL,
+
+    PRIMARY KEY (tid)
 );

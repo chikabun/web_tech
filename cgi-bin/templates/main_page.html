@@ -1,17 +1,52 @@
 [% WRAPPER wrapper.html %]
 
     <div class="main_content">
-        <h1> This is secured page </h1>
 
-        <form method="POST">
-            <input type='hidden' name='session_id' value='[% sid %]'>
-            <div>
-                <input type="text" name="txt" value="">
-            </div>
-            <div>
-                <input type="submit" name="create_pdf" value="Create PDF">
-            </div>
-        </form>
+        <div>
+            <h1> This is secured page </h1>
+        </div>
+
+        <div>
+            <table border="1" class="main_content_table">
+                <tr>
+                    <td>
+                        #
+                    </td>
+                    <td>
+                        Date-Time
+                    </td>
+                    <td>
+                        Text Data
+                    </td>
+                </tr>
+                [% FOREACH task IN tasks %]
+                    <tr>
+                        <td>
+                            [% task.position %]
+                        </td>
+                        <td>
+                            [% task.created %]
+                        </td>
+                        <td>
+                            [% task.data %]
+                        </td>
+                    </tr>
+                [% END %]
+            </table>
+        </div>
+
+        <div>
+            <form method="POST">
+                <input type='hidden' name='session_id' value='[% sid %]'>
+                <div>
+                    <input type="text" name="txt" value="">
+                </div>
+                <div>
+                    <input type="submit" name="create_pdf" value="Create PDF">
+                </div>
+            </form>
+        </div>
+
     </div>
 
 [% END %]

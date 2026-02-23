@@ -138,4 +138,31 @@ sub updateUser {
     }
 }
 
+sub createTask {
+    my $uid = shift;
+    my $data = shift;
+
+    $dbh->do(
+        "
+            INSERT INTO tasks 
+            (created, user, data)
+            VALUES (?, ?, ?)
+        ",
+        undef,
+        time(),
+        $uid,
+        $data,
+    ) or return 0;
+}
+
+sub getAllTasksForUser {
+    my $uid = shift;
+
+    my $sql = "SELECT * FROM tasks WHERE user=?";
+    my $sth = $dbh->prepare($sql);
+    $sth->execute($uid);
+
+    return $sth->fetchall_arrayref({});
+}
+
 1;
