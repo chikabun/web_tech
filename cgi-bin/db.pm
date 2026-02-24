@@ -1,5 +1,7 @@
 package db;
 
+use strict;
+
 use DBI;
 use Digest::MD5 qw(md5_hex);
 
@@ -163,6 +165,20 @@ sub getAllTasksForUser {
     $sth->execute($uid);
 
     return $sth->fetchall_arrayref({});
+}
+
+sub getPDFFilename {
+    my $uid = shift;
+    my $tid = shift;
+
+    my $sql = "
+        SELECT * FROM tasks WHERE user=? AND tid=?
+    ";
+    my $sth = $dbh->prepare($sql);
+    $sth->execute($uid, $tid);
+    my $row = $sth->fetchrow_hashref();
+
+    return $row->{created};
 }
 
 1;

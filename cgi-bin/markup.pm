@@ -1,9 +1,12 @@
 package markup;
 
+use strict;
+
 use Template;
+use FindBin qw($RealBin);
 
 sub getNavigator {
-    $id = shift;
+    my $id = shift;
 
     my @links = (
         '<a href="/cgi-bin/webtech_welcome.pl?session_id=' . $id . '">Welcome</a>',
@@ -27,6 +30,19 @@ sub createPage {
     my $template = Template->new({ INCLUDE_PATH => 'templates' });
     print "Content-Type: text/html\n\n";
     $template->process($tname, $vars) || die $template->error();
+}
+
+sub returnPDF {
+    my $uid = shift;
+    my $basename = shift;
+
+    print "Content-Type: application/pdf\n\n";
+    my $filename = $RealBin . '/pdfs/' . $uid . '/' . $basename;
+    open my $PDF, '<', $filename or die $filename;
+    while (my $line = <$PDF>) {
+        print $line;
+    }
+    close $PDF;
 }
 
 1;

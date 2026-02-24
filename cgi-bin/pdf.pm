@@ -1,11 +1,14 @@
 package pdf;
 
+use strict;
+
 use PDF::Builder;
 use File::Path qw(make_path);
 
 sub createPDF {
     my $t = shift;
     my $uid = shift;
+    my $filename = shift;
 
     my $pdf = PDF::Builder->new() or die $!;
 
@@ -23,8 +26,14 @@ sub createPDF {
     $text->text($t);
 
     # add image
-    # my $image = $pdf->image('ex2.png');
-    # $page->object($image, 100, 100);
+    my $image = $pdf->image('../public/images/ex2.png');
+    $page->object($image, 100, 100);
+
+    # add custom image
+    if ($filename) {
+        my $image = $pdf->image($filename);
+        $page->object($image, 100, 350);
+    }
 
     make_path('pdfs/' . $uid . '/');
     $pdf->save('pdfs/' . $uid . '/' . time() . '.pdf');

@@ -18,6 +18,9 @@
                     <td>
                         Text Data
                     </td>
+                    <td>
+                        Download
+                    </td>
                 </tr>
                 [% FOREACH task IN tasks %]
                     <tr>
@@ -30,16 +33,22 @@
                         <td>
                             [% task.data %]
                         </td>
+                        <td>
+                            <a target="_blank" href="[% task.link %]">Download</a>
+                        </td>
                     </tr>
                 [% END %]
             </table>
         </div>
 
         <div>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <input type='hidden' name='session_id' value='[% sid %]'>
                 <div>
                     <input type="text" name="txt" value="">
+                </div>
+                <div>
+                    <input type="file" name="img">
                 </div>
                 <div>
                     <input type="submit" name="create_pdf" value="Create PDF">
