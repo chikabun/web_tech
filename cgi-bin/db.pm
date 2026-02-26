@@ -143,17 +143,19 @@ sub updateUser {
 sub createTask {
     my $uid = shift;
     my $data = shift;
+    my $type = shift;
 
     $dbh->do(
         "
             INSERT INTO tasks 
-            (created, user, data)
-            VALUES (?, ?, ?)
+            (created, user, data, type)
+            VALUES (?, ?, ?, ?)
         ",
         undef,
         time(),
         $uid,
         $data,
+        $type,
     ) or return 0;
 }
 

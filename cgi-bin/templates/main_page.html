@@ -3,7 +3,7 @@
     <div class="main_content">
 
         <div>
-            <h1> This is secured page </h1>
+            <h1> PDF Creation and Downloading </h1>
         </div>
 
         <div>
@@ -14,6 +14,9 @@
                     </td>
                     <td>
                         Date-Time
+                    </td>
+                    <td>
+                        Type
                     </td>
                     <td>
                         Text Data
@@ -31,6 +34,9 @@
                             [% task.created %]
                         </td>
                         <td>
+                            [% task.type %]
+                        </td>
+                        <td>
                             [% task.data %]
                         </td>
                         <td>
@@ -41,20 +47,9 @@
             </table>
         </div>
 
-        <div>
-            <form method="POST" enctype="multipart/form-data">
-                <input type='hidden' name='session_id' value='[% sid %]'>
-                <div>
-                    <input type="text" name="txt" value="">
-                </div>
-                <div>
-                    <input type="file" name="img">
-                </div>
-                <div>
-                    <input type="submit" name="create_pdf" value="Create PDF">
-                </div>
-            </form>
-        </div>
+        [% INCLUDE business_card_form.html %]
+
+        [% INCLUDE post_card_form.html %]
 
     </div>
 

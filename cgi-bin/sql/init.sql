@@ -38,6 +38,7 @@ CREATE TABLE sessions (
 
 CREATE TABLE tasks (
     `tid` int NOT NULL AUTO_INCREMENT,
+    `type` varchar(50) NOT NULL,
     `created` int NOT NULL,
     `user` int NOT NULL,
     `data` text NOT NULL,
