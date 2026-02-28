@@ -20,7 +20,7 @@ sub getNavigator {
         push @links, '<a href="/cgi-bin/webtech_logout.pl?session_id=' . $id . '">Logout</a>';
     }
 
-    return join("&nbsp;|&nbsp;", @links);
+    return join("&nbsp;", @links);
 }
 
 sub createPage {

@@ -2,9 +2,29 @@
     <head>
         <title>Web Tech Course Work</title>
         <link rel="stylesheet" media="all" href="/public/css/main.css" />
+        <link rel="stylesheet" media="all" href="//cdn.datatables.net/2.3.7/css/dataTables.jqueryui.css" />
+        <link id="theme_link" rel="stylesheet" media="all" href="/public/css/themes/cupertino/jquery-ui.css" />
+
+        <script src="/public/js/jquery-4.0.0.min.js"></script>
+        <script src="/public/js/jquery-ui.min.js"></script>
+        <script src="//cdn.datatables.net/2.3.7/js/dataTables.min.js"></script>
+        <script src="//cdn.datatables.net/2.3.7/js/dataTables.jqueryui.js"></script>
+        <script>
+            $(function() {
+                $('#theme').change(function() {
+                    let val = $(this).val();
+                    val = '/public/css/themes/' + val + '/jquery-ui.css';
+                    $('#theme_link').attr('href', val);
+                });
+
+                $('input[type=submit]').button();
+                $('a').button();
+                $('input').tooltip();
+            });
+        </script>
     </head>
     <body>
-        <div class="header">
+        <div class="my_header">
             <table width="100%">
                 <tr>
                     <td>
@@ -17,13 +37,42 @@
                             --
                         [% END %]
                     </td>
+                    <td>
+                        <select id="theme">
+                            <option value="base">base</option>
+                            <option value="black-tie">black-tie</option>
+                            <option value="blitzer">blitzer</option>
+                            <option selected value="cupertino">cupertino</option>
+                            <option value="dark-hive">dark-hive</option>
+                            <option value="dot-luv">dot-luv</option>
+                            <option value="eggplant">eggplant</option>
+                            <option value="excite-bike">excite-bike</option>
+                            <option value="flick">flick</option>
+                            <option value="hot-sneaks">hot-sneaks</option>
+                            <option value="humanity">humanity</option>
+                            <option value="le-frog">le-frog</option>
+                            <option value="mint-choc">mint-choc</option>
+                            <option value="overcast">overcast</option>
+                            <option value="pepper-grinder">pepper-grinder</option>
+                            <option value="redmond">redmond</option>
+                            <option value="smoothness">smoothness</option>
+                            <option value="south-street">south-street</option>
+                            <option value="start">start</option>
+                            <option value="sunny">sunny</option>
+                            <option value="swanky-purse">swanky-purse</option>
+                            <option value="trontastic">trontastic</option>
+                            <option value="ui-darkness">ui-darkness</option>
+                            <option value="ui-lightness">ui-lightness</option>
+                            <option value="vader">vader</option>
+                        </select>
+                    </td>
                 </tr>
             </table>
         </div>
-        <div class="main_part">
+        <div class="my_main_part">
             [% content %]
         </div>
-        <div class="footer">
+        <div class="my_footer">
             KTKT Web Tech Course Work by Denys Bushtruk
         </div>
         <div>

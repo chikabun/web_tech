@@ -1,7 +1,4 @@
 <div>
-    <div>
-        <h3>Business Card</h3>
-    </div>
     <form method="POST" enctype="multipart/form-data">
         <input type='hidden' name='session_id' value='[% sid %]'>
         <input type='hidden' name='document_type' value='business card'>
@@ -12,7 +9,7 @@
                         Firstname
                     </td>
                     <td>
-                        <input type="text" name="firstname" value="">
+                        <input type="text" name="firstname" value="[% firstname %]">
                     </td>
                 </tr>
                 <tr>
@@ -20,7 +17,7 @@
                         Lastname
                     </td>
                     <td>
-                        <input type="text" name="lastname" value="">
+                        <input type="text" name="lastname" value="[% lastname %]">
                     </td>
                 </tr>
                 <tr>
@@ -28,7 +25,7 @@
                         Position
                     </td>
                     <td>
-                        <input type="text" name="position" value="">
+                        <input type="text" name="position" value="[% position %]">
                     </td>
                 </tr>
                 <tr>
@@ -36,7 +33,7 @@
                         E-Mail
                     </td>
                     <td>
-                        <input type="text" name="email" value="">
+                        <input type="text" name="email" value="[% email %]">
                     </td>
                 </tr>
                 <tr>

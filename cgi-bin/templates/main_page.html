@@ -7,49 +7,75 @@
         </div>
 
         <div>
-            <table border="1" class="main_content_table">
-                <tr>
-                    <td>
-                        #
-                    </td>
-                    <td>
-                        Date-Time
-                    </td>
-                    <td>
-                        Type
-                    </td>
-                    <td>
-                        Text Data
-                    </td>
-                    <td>
-                        Download
-                    </td>
-                </tr>
-                [% FOREACH task IN tasks %]
+            <table border="1" class="main_content_table" id="main_table">
+                <thead>
                     <tr>
                         <td>
-                            [% task.position %]
+                            #
                         </td>
                         <td>
-                            [% task.created %]
+                            Date-Time
                         </td>
                         <td>
-                            [% task.type %]
+                            Type
                         </td>
                         <td>
-                            [% task.data %]
+                            Text Data
                         </td>
                         <td>
-                            <a target="_blank" href="[% task.link %]">Download</a>
+                            Download
                         </td>
                     </tr>
-                [% END %]
+                </thead>
+                <tbody>
+                    [% FOREACH task IN tasks %]
+                        <tr>
+                            <td>
+                                [% task.position %]
+                            </td>
+                            <td>
+                                [% task.created %]
+                            </td>
+                            <td>
+                                [% task.type %]
+                            </td>
+                            <td>
+                                [% task.data %]
+                            </td>
+                            <td>
+                                <a target="_blank" href="[% task.link %]">Download</a>
+                            </td>
+                        </tr>
+                    [% END %]
+                </tbody>
             </table>
         </div>
 
-        [% INCLUDE business_card_form.html %]
+        <script>
+            $(function() {
+                $('#tabs').tabs();
+                new DataTable('#main_table');
+            });
+        </script>
 
-        [% INCLUDE post_card_form.html %]
+        <div id="tabs">
+            <ul>
+                <li><a href="#doc1">Business Card</a></li>
+                <li><a href="#doc2">Post Card</a></li>
+                <li><a href="#doc3">Album</a></li>
+            </ul>
+            <div id="doc1">
+                [% INCLUDE business_card_form.html %]
+            </div>
+
+            <div id="doc2">
+                [% INCLUDE post_card_form.html %]
+            </div>
+
+            <div id="doc3">
+                [% INCLUDE album_form.html %]
+            </div>
+        </div>
 
     </div>
 

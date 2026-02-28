@@ -1,5 +1,11 @@
 [% WRAPPER wrapper.html %]
 
+    <script>
+        $(function() {
+            $('input[type=submit]').button();
+        });
+    </script>
+
     <div class="login_content">
         
         <h2> Sign in </h2>
@@ -11,7 +17,7 @@
                         Login
                     </td>
                     <td>
-                        <input type='text' name='login' value=''>
+                        <input type='text' name='login' title='Enter your login' value=''>
                     </td>
                 </tr>
                 <tr>
@@ -19,7 +25,7 @@
                         Password
                     </td>
                     <td>
-                        <input type='text' name='password' value=''>
+                        <input type='password' name='password' title='Enter your password' value=''>
                     </td>
                 </tr>
                 <tr>

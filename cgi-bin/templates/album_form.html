@@ -1,0 +1,59 @@
+<div>
+    <form method="POST" enctype="multipart/form-data">
+        <input type='hidden' name='session_id' value='[% sid %]'>
+        <input type='hidden' name='document_type' value='album'>
+        <div>
+            <table border="1" class="main_content_table">
+                <tr>
+                    <td>
+                        Title
+                    </td>
+                    <td>
+                        <input type="text" name="title" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Picture 1
+                    </td>
+                    <td>
+                        <input type="file" name="img">
+                        Use 210 x 210 (or less) PNG file
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Picture 2
+                    </td>
+                    <td>
+                        <input type="file" name="img2">
+                        Use 210 x 210 (or less) PNG file
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Picture 3
+                    </td>
+                    <td>
+                        <input type="file" name="img3">
+                        Use 210 x 210 (or less) PNG file
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Picture 4
+                    </td>
+                    <td>
+                        <input type="file" name="img4">
+                        Use 210 x 210 (or less) PNG file
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="create_pdf" value="Create PDF">
+                    </td>
+                </tr>
+            </table>    
+        </div>
+    </form>
+</div>

@@ -52,25 +52,54 @@ sub createPDF {
 
         my $text = $page->text();
         $text->font($font, 20);
-        $text->position(200, 700);
-        $text->text($data->{firstname});
-
-        my $text2 = $page->text();
-        $text2->font($font, 20);
-        $text2->position(200, 600);
-        $text->text($data->{firstname});
+        $text->position(20, 700);
+        $text->text($data->{firstname} . ' ' . $data->{lastname});
 
         # add custom image 1
         if ($data->{file1}) {
             my $image = $pdf->image($data->{file1});
-            $page->object($image, 100, 350);
+            $page->object($image, 20, 400);
         }
 
         # add custom image 2
         if ($data->{file2}) {
             my $image = $pdf->image($data->{file2});
-            $page->object($image, 100, 150);
+            $page->object($image, 300, 400);
         }
+
+        my $staticImage1 = $pdf->image('../public/images/frame_with_author.png');
+        $page->object($staticImage1, 20, 20);
+    }
+    elsif ($type eq 'album') {
+        my $page = $pdf->page();
+        $page->size('Letter');
+        my $font = $pdf->font('Helvetica-Bold');
+
+        my $text = $page->text();
+        $text->font($font, 20);
+        $text->position(20, 730);
+        $text->text($data->{title});
+
+        # add custom images
+        if ($data->{file1}) {
+            my $image = $pdf->image($data->{file1});
+            $page->object($image, 50, 450);
+        }
+        if ($data->{file2}) {
+            my $image = $pdf->image($data->{file2});
+            $page->object($image, 350, 450);
+        }
+        if ($data->{file3}) {
+            my $image = $pdf->image($data->{file3});
+            $page->object($image, 50, 180);
+        }
+        if ($data->{file4}) {
+            my $image = $pdf->image($data->{file4});
+            $page->object($image, 350, 180);
+        }
+
+        my $staticImage1 = $pdf->image('../public/images/frame_with_author.png');
+        $page->object($staticImage1, 20, 20);
     }
     else {
         die 'Unknown PDF type';

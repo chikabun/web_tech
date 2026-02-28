@@ -1,10 +1,10 @@
-.header {
+.my_header {
     background-color: gray;
 }
-.main_part {
+.my_main_part {
     background-color: white;
 }
-.footer {
+.my_footer {
     background-color: gray;
     text-align: center;
 }
@@ -21,4 +21,3 @@
     border-collapse: collapse;
     margin-bottom: 20px;
 }
-

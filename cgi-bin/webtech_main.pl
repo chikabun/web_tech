@@ -22,13 +22,16 @@ my $position = $q->param('position');
 my $email = $q->param('email');
 my $phone = $q->param('phone');
 my $site = $q->param('site');
+my $title = $q->param('title');
 
 my $file = $q->param('img');
 my $file2 = $q->param('img2');
+my $file3 = $q->param('img3');
+my $file4 = $q->param('img4');
 
 my $vars = {
     sid => $sid,
-    navigator => markup::getNavigator($sid),
+    navigator => markup::getNavigator($sid) || "XXXXXXXXXX" ,
 };
 
 if ($sid) {
@@ -37,15 +40,25 @@ if ($sid) {
     if ($isSessionOK) {
 
         my $user = db::getUserBySessionId($sid);
+        
+        $vars->{firstname} = $user->{firstname};
+        $vars->{lastname} = $user->{lastname};
+        $vars->{position} = $user->{position};
+        $vars->{email} = $user->{email};
 
         # save submitted image
-        my $filename1;
-        my $filename2;
+        my ($filename1, $filename2, $filename3, $filename4);
         if ($file) {
             $filename1 = saveUploadedFile($file, $user, 'a');
         }
         if ($file2) {
             $filename2 = saveUploadedFile($file2, $user, 'b');
+        }
+        if ($file3) {
+            $filename3 = saveUploadedFile($file3, $user, 'c');
+        }
+        if ($file4) {
+            $filename4 = saveUploadedFile($file4, $user, 'd');
         }
 
         # do main work, if a PDF creation required
@@ -57,14 +70,17 @@ if ($sid) {
                 email => $email,
                 phone => $phone,
                 site => $site,
+                title => $title,
 
                 file1 => $filename1,
                 file2 => $filename2,
+                file3 => $filename3,
+                file4 => $filename4,
             };
             pdf::createPDF($data, $user->{uid}, $type);
 
             my @tmp = ();
-            for my $k ('firstname', 'lastname', 'position', 'email', 'phone', 'site') {
+            for my $k ('firstname', 'lastname', 'position', 'email', 'phone', 'site', 'title') {
                 if ($data->{$k}) {
                     push @tmp, $k . '=' . $data->{$k};
                 }
@@ -79,6 +95,12 @@ if ($sid) {
         }
         if ($filename2 && -e $filename2) {
             unlink $filename2;
+        }
+        if ($filename3 && -e $filename3) {
+            unlink $filename3;
+        }
+        if ($filename4 && -e $filename4) {
+            unlink $filename4;
         }
 
         # display main page
