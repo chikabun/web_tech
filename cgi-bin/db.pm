@@ -169,6 +169,14 @@ sub getAllTasksForUser {
     return $sth->fetchall_arrayref({});
 }
 
+sub getAllTasks {
+    my $sql = " SELECT * FROM tasks AS t, users AS u WHERE u.uid = t.user";
+    my $sth = $dbh->prepare($sql);
+    $sth->execute();
+
+    return $sth->fetchall_arrayref({});
+}
+
 sub getPDFFilename {
     my $uid = shift;
     my $tid = shift;
@@ -181,6 +189,12 @@ sub getPDFFilename {
     my $row = $sth->fetchrow_hashref();
 
     return $row->{created};
+}
+
+sub approveTask {
+    my $tid = shift;
+
+    $dbh->do("UPDATE tasks SET ready = 1 WHERE tid=?", undef, $tid);
 }
 
 1;

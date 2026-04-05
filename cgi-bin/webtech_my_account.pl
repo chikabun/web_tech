@@ -45,6 +45,9 @@ if ($sid) {
 
         my $user = db::getUserBySessionId($sid);
 
+        # reinit navagator
+        $vars->{navigator} = markup::getNavigator($sid, $user);
+
         $vars->{username} = $user->{firstname} . ' ' . $user->{lastname};
 
         $vars->{login} = $user->{login};

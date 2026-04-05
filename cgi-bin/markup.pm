@@ -7,6 +7,7 @@ use FindBin qw($RealBin);
 
 sub getNavigator {
     my $id = shift;
+    my $user = shift;
 
     my @links = (
         '<a href="/cgi-bin/webtech_welcome.pl?session_id=' . $id . '">Welcome</a>',
@@ -20,7 +21,16 @@ sub getNavigator {
         push @links, '<a href="/cgi-bin/webtech_logout.pl?session_id=' . $id . '">Logout</a>';
     }
 
-    return join("&nbsp;", @links);
+    if ($user->{login} eq 'admin') {
+        push @links, '<a href="/cgi-bin/webtech_admin.pl?session_id=' . $id . '">Admin</a>';
+    }
+
+
+    my $res = "<ul>";
+    $res .= join("", map { "<li>" . $_ . "</li>" } @links);
+    $res .= "</ul>";
+
+    return $res;
 }
 
 sub createPage {

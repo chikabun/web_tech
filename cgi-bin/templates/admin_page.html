@@ -3,7 +3,7 @@
     <div class="main_content">
 
         <div>
-            <h1> PDF Creation and Downloading </h1>
+            <h1> Administration </h1>
         </div>
 
         <div>
@@ -17,13 +17,16 @@
                             Date-Time
                         </td>
                         <td>
+                            Owner
+                        </td>
+                        <td>
                             Type
                         </td>
                         <td>
                             Text Data
                         </td>
                         <td>
-                            Download
+                            Approve
                         </td>
                     </tr>
                 </thead>
@@ -37,16 +40,17 @@
                                 [% task.created %]
                             </td>
                             <td>
+                                [% task.login %] ([% task.firstname %] [% task.lastname %])
+                            </td>
+                            <td>
                                 [% task.type %]
                             </td>
                             <td>
                                 [% task.data %]
                             </td>
                             <td>
-                                [% IF task.link %]
-                                    <a target="_blank" href="[% task.link %]">Download</a>
-                                [% ELSE %]
-                                    Pay money first
+                                [% IF task.approve %]
+                                    <a target="_blank" href="[% task.approve %]">Approve</a>
                                 [% END %]
                             </td>
                         </tr>
@@ -61,25 +65,6 @@
                 new DataTable('#main_table');
             });
         </script>
-
-        <div id="tabs">
-            <ul>
-                <li><a href="#doc1">Business Card</a></li>
-                <li><a href="#doc2">Post Card</a></li>
-                <li><a href="#doc3">Album</a></li>
-            </ul>
-            <div id="doc1">
-                [% INCLUDE business_card_form.html %]
-            </div>
-
-            <div id="doc2">
-                [% INCLUDE post_card_form.html %]
-            </div>
-
-            <div id="doc3">
-                [% INCLUDE album_form.html %]
-            </div>
-        </div>
 
     </div>
 

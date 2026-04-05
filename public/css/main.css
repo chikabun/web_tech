@@ -1,20 +1,49 @@
+@media (min-width: 0px) {
+  .navigator li {
+    display:block;
+  }
+  .navigator ul {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .navigator li {
+    display:inline;
+  }
+  .navigator ul {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+
 .my_header {
     background-color: gray;
 }
+
 .my_main_part {
     background-color: white;
 }
+
 .my_footer {
     background-color: gray;
     text-align: center;
 }
+
 .login_table , .registration_table {
     width: 400px;
     margin: auto;
 }
+
 .welcome_content , .registration_content , .login_content , .main_content {
     text-align: center;
 }
+
 .welcome_content_table , .main_content_table {
     width: 80%;
     margin: auto;

@@ -20,6 +20,10 @@ if ($sid) {
     my $isSessionOK = db::isSessionOK($sid);
     if ($isSessionOK) {
         my $user = db::getUserBySessionId($sid);
+
+        # reinit navagator
+        $vars->{navigator} = markup::getNavigator($sid, $user);
+
         $vars->{username} = $user->{firstname} . ' ' . $user->{lastname};
     }
 }

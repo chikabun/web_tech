@@ -40,6 +40,9 @@ if ($sid) {
     if ($isSessionOK) {
 
         my $user = db::getUserBySessionId($sid);
+
+        # reinit navagator
+        $vars->{navigator} = markup::getNavigator($sid, $user);
         
         $vars->{firstname} = $user->{firstname};
         $vars->{lastname} = $user->{lastname};
@@ -112,7 +115,9 @@ if ($sid) {
         for my $task (@{$tasks}) {
             $task->{position} = $ctr;
             $task->{created} = localtime($task->{created});
-            $task->{link} = sprintf '/cgi-bin/webtech_download.pl?session_id=%s&tid=%s', $sid, $task->{tid};
+            if ($task->{ready}) {
+                $task->{link} = sprintf '/cgi-bin/webtech_download.pl?session_id=%s&tid=%s', $sid, $task->{tid};
+            }
             $ctr++;
         }
         $vars->{tasks} = $tasks;
